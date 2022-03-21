@@ -1,26 +1,60 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { css } from '@emotion/react';
+import { browserLocalPersistence, getAuth, onIdTokenChanged, setPersistence } from 'firebase/auth';
+import { getDatabase, onValue, ref } from 'firebase/database';
+import React, { useEffect } from 'react';
+import Header from './components/common/Header';
+import { LogDataContainer, LogDataGroupContainer, userContainer } from './container';
+import firebase from './utils/firebase';
+import { HomeView } from './views';
+import SignInSignUpView from './views/SignInSignUpView';
+import Map from 'react-map-gl'
+
+
 
 function App() {
+  const auth = getAuth(firebase);
+  const database = getDatabase(firebase);
+  const user = userContainer.useContainer();
+
+  useEffect(() => {
+    setPersistence(auth, browserLocalPersistence).then(() => {
+      onIdTokenChanged(auth, nextUser => {
+        user.login(nextUser)
+        if (nextUser) {
+          const uid = nextUser.uid;
+          onValue(ref(database, `users/${uid}`), (snapshot) => {
+            user.setPermission(snapshot.val().permissions);
+            user.setProfile(snapshot.val().profile);
+          }, {
+            onlyOnce: true
+          })
+        }
+      })
+    })
+  }, [])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <div css={appCSS}>
+      <Header />
+      {user.user ? <HomeView /> : <div />}
+      <SignInSignUpView />
+    </div >
   );
 }
 
-export default App;
+const appCSS = css({
+  height: '100vh',
+  display: 'flex',
+  flexDirection: 'column',
+  backgroundColor: '#142137',
+  textAlign: 'center'
+})
+
+export default () => (
+  <LogDataContainer.Provider>
+    <userContainer.Provider>
+      <LogDataGroupContainer.Provider>
+        <App />
+      </LogDataGroupContainer.Provider>
+    </userContainer.Provider>
+  </LogDataContainer.Provider>
+)

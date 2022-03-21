@@ -1,0 +1,22 @@
+.modal :global(.modal-content) {
+  background-color: #142137;
+}
+
+.modal :global(.modal-header) {
+  border-bottom: #142137;
+}
+
+.title {
+  text-align: center;
+  color: #ffffff;
+}
+
+.unactiveTitle {
+  text-align: center;
+  color: #ffffff;
+  opacity: 0.3;
+}
+
+.unactiveTitle:hover {
+  opacity: 0.6;
+}
