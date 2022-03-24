@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import ReactMapGL, { GeolocateControl, NavigationControl } from "react-map-gl";
+import ReactMapGL, { NavigationControl } from "react-map-gl";
 import { getAircraftLatLng } from '../../utils/logData';
 import MapMarker from './map/MapMarker';
+import PlaneMarker from './map/PlaneMarker';
 import PlanePath from './map/PlanePath';
 import TrackPlaneButton from './map/TrackPlaneControl';
-import PlaneMarker from './map/PlaneMarker';
 
 const Map = React.memo(({ log }) => {
     const [isTrack, setIsTrack] = useState(true)
