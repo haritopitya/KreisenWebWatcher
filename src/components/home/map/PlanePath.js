@@ -1,7 +1,7 @@
 import React from 'react'
 import { Layer, Source } from 'react-map-gl'
 
-const PlanePath = ({ log }) => {
+const PlanePath = React.memo(({ log }) => {
     if (!log) return null
     const pathLog = log
         .filter(e => e['dataStationData/latitude'].value !== '---' && e['dataStationData/longitude'].value !== '---')
@@ -30,6 +30,6 @@ const PlanePath = ({ log }) => {
             <Layer {...pathLayerStyle} />
         </Source>
     )
-}
+})
 
 export default PlanePath

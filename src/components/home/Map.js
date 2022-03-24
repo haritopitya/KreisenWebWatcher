@@ -6,7 +6,7 @@ import PlanePath from './map/PlanePath';
 import TrackPlaneButton from './map/TrackPlaneControl';
 import PlaneMarker from './map/PlaneMarker';
 
-const Map = ({ log }) => {
+const Map = React.memo(({ log }) => {
     const [isTrack, setIsTrack] = useState(true)
     const [isMoveFromFunc, setIsMoveFromFunc] = useState(false)
     const [view, setView] = useState({
@@ -47,6 +47,6 @@ const Map = ({ log }) => {
             <PlaneMarker position={currentPosition} pitch={view.pitch} view={view} />
         </ReactMapGL>
     )
-}
+})
 
 export default Map

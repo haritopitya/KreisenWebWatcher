@@ -2,6 +2,7 @@
   "name": "meister-realtime-dataviewer",
   "version": "1.0.0",
   "private": true,
+  "homepage": "./",
   "dependencies": {
     "@craco/craco": "^6.4.3",
     "@emotion/babel-plugin": "^11.7.2",
@@ -54,14 +55,10 @@
   },
   "browserslist": {
     "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
+      "defaults, not ie 11"
     ],
     "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
+      "defaults, not ie 11"
     ]
   }
 }

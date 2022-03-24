@@ -4,16 +4,14 @@ import { Container, Row, Tab, Tabs } from 'react-bootstrap';
 import Datacard from './DataCard';
 import './tab.css';
 
-const DataScreen = ({ log }) => {
+const DataScreen = ({ latestData }) => {
     const [tabKey, setTabKey] = useState('summary');
     const onChangeTab = (key) => {
         setTabKey(key)
     };
-    const latestLogData = log && log[log.length - 1];
     const summaryName = ['dataStationData/pitch', 'dataStationData/roll', 'dataStationData/yaw']
     const summary = summaryName.map(key => {
-
-        return latestLogData && latestLogData[key]
+        return latestData && latestData[key]
     })
     return (
         <div css={styles.wrap}>
@@ -31,7 +29,7 @@ const DataScreen = ({ log }) => {
                 <Tab eventKey='all' title='All'>
                     <Container fluid>
                         <Row xs={1} md={2}>
-                            {latestLogData && Object.keys(latestLogData).map((key) => (< Datacard data={latestLogData[key]} key={key} />))}
+                            {latestData && Object.keys(latestData).map((key) => (< Datacard data={latestData[key]} key={key} />))}
                         </Row>
                     </Container>
                 </Tab>

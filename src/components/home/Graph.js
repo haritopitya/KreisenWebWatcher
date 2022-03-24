@@ -3,7 +3,7 @@ import React from 'react';
 import Chart from 'react-apexcharts';
 
 
-const Graph = ({ log }) => {
+const Graph = React.memo(({ log }) => {
     const data = [
         {
             name: 'roll',
@@ -63,6 +63,6 @@ const Graph = ({ log }) => {
             <Chart type='line' options={options} series={data} height='100%' />
         </div>
     )
-}
+})
 
 export default Graph

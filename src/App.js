@@ -3,13 +3,10 @@ import { browserLocalPersistence, getAuth, onIdTokenChanged, setPersistence } fr
 import { getDatabase, onValue, ref } from 'firebase/database';
 import React, { useEffect } from 'react';
 import Header from './components/common/Header';
-import { LogDataContainer, LogDataGroupContainer, userContainer } from './container';
+import { userContainer } from './container';
 import firebase from './utils/firebase';
 import { HomeView } from './views';
 import SignInSignUpView from './views/SignInSignUpView';
-import Map from 'react-map-gl'
-
-
 
 function App() {
   const auth = getAuth(firebase);
@@ -50,11 +47,7 @@ const appCSS = css({
 })
 
 export default () => (
-  <LogDataContainer.Provider>
     <userContainer.Provider>
-      <LogDataGroupContainer.Provider>
         <App />
-      </LogDataGroupContainer.Provider>
     </userContainer.Provider>
-  </LogDataContainer.Provider>
 )

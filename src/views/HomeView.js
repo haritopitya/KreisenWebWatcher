@@ -4,20 +4,18 @@ import firebase from "../utils/firebase";
 import { getDatabase, ref, onValue, off, get, onChildAdded, query, limitToLast } from "firebase/database"
 import { userContainer } from "../container";
 import { css } from "@emotion/react";
-import { flattenLogdata }from'../utils/logData'
+import { flattenLogdata } from '../utils/logData'
 
 const HomeView = () => {
     const user = userContainer.useContainer().user;
     const [logDataGroup, setLogDataGroup] = useState(null);
     const [logData, setLogData] = useState([]);
+    const [latestLogData, setLatestLogData] = useState(null);
+    const logStore = useRef([]);
     const refLogDataGroup = useRef(logDataGroup);
-    const refLogData = useRef(logData);
     useEffect(() => {
         refLogDataGroup.current = logDataGroup;
     }, [logDataGroup])
-    useEffect(() => {
-        refLogData.current = logData;
-    }, [logData])
 
 
     useEffect(() => {
@@ -26,15 +24,21 @@ const HomeView = () => {
                 setLogData([]);
                 return;
             }
-            const logArr = Object.keys(data).map((key) => (data[key]));
-            logArr.sort((a, b) => (a.timestamp < b.timestamp ? -1 : 1));
-            setLogData(logArr.map(e=>flattenLogdata(e)));
+            const logAll = Object.keys(data).map((key) => (data[key]));
+            const logArr = logAll.sort((a, b) => (a.timestamp < b.timestamp ? -1 : 1)).filter((val, ind) => (ind % 10 === 0));
+            setLogData(logArr.map(e => flattenLogdata(e)));
         };
         const updateLogData = (data) => {
-            setLogData((prevLogData) => {
-                const logData = prevLogData.concat(flattenLogdata(data))
-                return logData;
-            });
+            const flattenedLogData=flattenLogdata(data)
+            setLatestLogData(flattenedLogData);
+            logStore.current = logStore.current.concat(flattenedLogData)
+            if (logStore.current.length === 10) {
+                setLogData((prevLogData) => {
+                    const logData = prevLogData.concat(logStore.current)
+                    return logData;
+                });
+                logStore.current = [];
+            }
         };
         const db = getDatabase(firebase);
         const logDataGroupRef = ref(db, 'current-logdata-group');
@@ -62,11 +66,11 @@ const HomeView = () => {
     return (
         <div css={styles.wrap}>
             <div css={styles.inner}>
-                <PFD log={logData} />
+                <PFD latestData={latestLogData} />
                 <Graph log={logData} />
             </div>
             <div css={styles.inner}>
-                <DataScreen log={logData} />
+                <DataScreen latestData={latestLogData} />
             </div>
             <div css={styles.inner}>
                 <Map log={logData} />

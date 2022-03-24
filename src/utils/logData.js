@@ -47,7 +47,7 @@ const getAircraftLatLng = (flattenedLogData) => {
   if (flattenedLogData) {
     latLng.latitude = parseFloat(flattenedLogData['dataStationData/latitude'].value)
     latLng.longitude = parseFloat(flattenedLogData['dataStationData/longitude'].value)
-    latLng.bearing = parseFloat(flattenedLogData['dataStationData/yaw'].value) || 0;
+    latLng.bearing = parseFloat(flattenedLogData['dataStationData/trueCourse'].value) || 0;
   }
   return latLng
 }

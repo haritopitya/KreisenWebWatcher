@@ -7,8 +7,7 @@ import AttitudeGrid from './AttitudeGrid';
 import Compass from './Compass';
 import SpeedMeter from './SpeedMeter';
 
-const PFD = ({ log }) => {
-    const latestData = log[log.length - 1]
+const PFD = ({ latestData }) => {
     const roll =latestData? latestData['dataStationData/roll'].value : 0;
     const pitch = latestData ? latestData['dataStationData/pitch'].value : 0;
     const direction = latestData ? latestData['dataStationData/yaw'].value : 0;
