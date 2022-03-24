@@ -32,7 +32,7 @@ const Map = React.memo(({ log }) => {
         if (isTrack) setView(currentView => ({ ...currentView, ...(currentPosition && currentPosition.latitude && currentPosition.longitude && currentPosition) }))
     }, [log, isTrack])
     return (
-        <ReactMapGL ReactMapGL
+        <ReactMapGL
             {...view}
             onMove={onMove}
             onMoveStart={onMoveStart}
