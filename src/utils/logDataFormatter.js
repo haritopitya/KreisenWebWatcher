@@ -2,7 +2,7 @@ import * as Fas from '@fortawesome/free-solid-svg-icons'
 import { unixtimeToStr } from './date'
 
 const color = {
-  'default': '#343a40',
+  'default': '#f8f9fa',
   'altimeterData': '#007bff',
   'speedometerData': '#28a745',
   'dataStationData': '#FC7100',
