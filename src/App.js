@@ -47,7 +47,7 @@ const appCSS = css({
 })
 
 export default () => (
-    <userContainer.Provider>
-        <App />
-    </userContainer.Provider>
+  <userContainer.Provider>
+    <App />
+  </userContainer.Provider>
 )
