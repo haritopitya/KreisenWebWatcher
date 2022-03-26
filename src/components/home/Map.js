@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import ReactMapGL, { NavigationControl } from "react-map-gl";
 import { getAircraftLatLng } from '../../utils/logData';
 import MapMarker from './map/MapMarker';
@@ -10,12 +10,12 @@ const Map = React.memo(({ log }) => {
     const [isTrack, setIsTrack] = useState(true)
     const [isMoveFromFunc, setIsMoveFromFunc] = useState(false)
     const [view, setView] = useState({
-            latitude: 35.55396,
-            longitude: 139.46349,
-            pitch: 60,
-            zoom: 20,
-            bearing: 0
-        })
+        latitude: 35.55396,
+        longitude: 139.46349,
+        pitch: 60,
+        zoom: 20,
+        bearing: 0
+    })
     const latestData = log && log.filter(e => e['dataStationData/latitude'].value !== '---' && e['dataStationData/longitude'].value !== '---').slice(-1)[0];
     const currentPosition = getAircraftLatLng(latestData)
     const onMove = ({ viewState, type }) => {
@@ -28,6 +28,8 @@ const Map = React.memo(({ log }) => {
         if (isMoveFromFunc) setIsTrack(true)
         setIsMoveFromFunc(false)
     }
+    const setIsMoveFromFuncRef = useCallback(setIsMoveFromFunc);
+    const setIsTrackRef = useCallback(setIsTrack);
     useEffect(() => {
         if (isTrack) setView(currentView => ({ ...currentView, ...(currentPosition && currentPosition.latitude && currentPosition.longitude && currentPosition) }))
     }, [log, isTrack])
@@ -43,7 +45,7 @@ const Map = React.memo(({ log }) => {
             <MapMarker />
             <PlanePath log={log} />
             <NavigationControl visualizePitch={true} />
-            <TrackPlaneButton setIsTrack={setIsTrack} setIsMoveFromFunc={setIsMoveFromFunc} position={ currentPosition }/>
+            <TrackPlaneButton setIsTrack={setIsTrackRef} setIsMoveFromFunc={setIsMoveFromFuncRef} position={currentPosition} />
             <PlaneMarker position={currentPosition} pitch={view.pitch} view={view} />
         </ReactMapGL>
     )
