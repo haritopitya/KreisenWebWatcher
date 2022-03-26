@@ -36,7 +36,7 @@ const Header = () => {
                         className='d-inline-block align-top'
                         height={'30vh'}
                     />
-                    RealtimeDataViwer2022
+                    Kreisen Watcher
                 </NavbarBrand>
                 <NavbarCollapse className='justify-content-end'>
                     {
