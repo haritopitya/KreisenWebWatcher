@@ -1,11 +1,12 @@
 import { css } from '@emotion/react';
 import { browserLocalPersistence, getAuth, onIdTokenChanged, setPersistence } from 'firebase/auth';
 import { getDatabase, onValue, ref } from 'firebase/database';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
+import { Route, Routes } from 'react-router-dom';
 import Header from './components/common/Header';
 import { userContainer } from './container';
 import firebase from './utils/firebase';
-import { HomeView } from './views';
+import { AdminView, HomeView } from './views';
 import SignInSignUpView from './views/SignInSignUpView';
 
 function App() {
@@ -32,7 +33,13 @@ function App() {
   return (
     <div css={appCSS}>
       <Header />
-      {user.user ? <HomeView /> : <div />}
+      {user.user
+        ?
+        <Routes>
+          <Route path={'/'} element={<HomeView />} />
+          <Route path={'/admin'} element={<AdminView permissions={user.permission} />} />
+        </Routes>
+        : <div />}
       <SignInSignUpView />
     </div >
   );
