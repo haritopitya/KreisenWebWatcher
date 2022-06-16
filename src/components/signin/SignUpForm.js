@@ -2,6 +2,7 @@ import { css } from '@emotion/react'
 import { faEnvelope, faKey, faUser, faWrench } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth'
+import { set, ref, getDatabase } from 'firebase/database'
 import React, { useState } from 'react'
 import { Button, Form, InputGroup, Spinner } from 'react-bootstrap'
 import firebase from './../../utils/firebase'
@@ -40,22 +41,18 @@ const SignUpForm = ({ onFailure }) => {
     const createAccount = () => {
         setBusy(true);
         createUserWithEmailAndPassword(auth, email, password)
-        // firebase.auth().createUserWithEmailAndPassword(email, password)
-        //     .then((e) => {
-        //         const uid = firebase.auth().currentUser.uid
-
-        //         firebase.database().ref(`users/${uid}/profile`).set({
-        //             email, name, position,
-        //         })
-        //     })
-        //     .catch((e) => {
-        //         if (onFailure) {
-        //             onFailure(e)
-        //         } else {
-        //             console.log(e)
-        //         }
-        //         setBusy(false);
-        //     })
+            .then((e) => {
+                const uid = auth.currentUser.uid;
+                set(ref(getDatabase(firebase), `users/${uid}/profile`), { email, name, position })
+            })
+            .catch((e) => {
+                if (onFailure) {
+                    onFailure(e)
+                } else {
+                    console.log(e)
+                }
+                setBusy(false);
+            })
     }
 
     // const onChange = (key, val) => {
