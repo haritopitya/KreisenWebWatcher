@@ -1,14 +1,14 @@
 import { initializeApp } from 'firebase/app';
 
 const config = {
-    apiKey: 'AIzaSyB0HGH13uo4Ikrhw36X0chpGgCGkO487YA',
-    authDomain: 'test2-ec6ff.firebaseapp.com',
-    databaseURL: 'https://test2-ec6ff-default-rtdb.firebaseio.com',
-    projectId: 'test2-ec6ff',
-    storageBucket: 'test2-ec6ff.appspot.com',
-    messagingSenderId: '751798801324',
-    appId: '1:751798801324:web:0a901e0304e9d8d7726009',
-    measurementId: 'G-GWYD5FLNFM'
+    apiKey: "AIzaSyAghJYCWxiRrMe_EkMkk0PqpYAUaKZlHtI",
+    authDomain: "meister2022-a27e9.firebaseapp.com",
+    databaseURL: "https://meister2022-a27e9-default-rtdb.firebaseio.com",
+    projectId: "meister2022-a27e9",
+    storageBucket: "meister2022-a27e9.appspot.com",
+    messagingSenderId: "610369538295",
+    appId: "1:610369538295:web:25be677543c398dff56bf2",
+    measurementId: "G-1S3GPVS2QV"
 }
 
 const firebase = initializeApp(config);

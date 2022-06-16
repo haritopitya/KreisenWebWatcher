@@ -1,13 +1,10 @@
-import { css } from "@emotion/react";
-import { get, getDatabase, limitToLast, off, onChildAdded, onValue, query, ref } from "firebase/database";
 import React, { useEffect, useRef, useState } from "react";
 import { DataScreen, Graph, Map, PFD } from "../components/home";
-import { userContainer } from "../container";
 import firebase from "../utils/firebase";
-import { flattenLogdata } from '../utils/logData';
-
-const DETAIL_LANGE = 500;
-const UPDATE_LATE = 10;
+import { getDatabase, ref, onValue, off, get, onChildAdded, query, limitToLast } from "firebase/database"
+import { userContainer } from "../container";
+import { css } from "@emotion/react";
+import { flattenLogdata } from '../utils/logData'
 
 const HomeView = () => {
     const user = userContainer.useContainer().user;
@@ -16,35 +13,28 @@ const HomeView = () => {
     const [latestLogData, setLatestLogData] = useState(null);
     const logStore = useRef([]);
     const refLogDataGroup = useRef(logDataGroup);
-    const latestLogDataKey = useRef(null);
     useEffect(() => {
         refLogDataGroup.current = logDataGroup;
     }, [logDataGroup])
+
+
     useEffect(() => {
-        const initLogData = (snapshot) => {
-            if (!snapshot.exists()) {
+        const initLogData = (data) => {
+            if (!data) {
                 setLogData([]);
-                setLatestLogData(null)
                 return;
             }
-            let logAll = []
-            snapshot.forEach((snapshot) => {
-                logAll.push(snapshot.val())
-                latestLogDataKey.current = snapshot.key;
-            });
-            const logArr = logAll.filter((val, ind) => ((logAll.length - (DETAIL_LANGE + 1)) < ind || ind % UPDATE_LATE === 0));
+            const logAll = Object.keys(data).map((key) => (data[key]));
+            const logArr = logAll.sort((a, b) => (a.timestamp < b.timestamp ? -1 : 1)).filter((val, ind) => (ind % 10 === 0||ind>logAll.length-600));
             setLogData(logArr.map(e => flattenLogdata(e)));
         };
         const updateLogData = (data) => {
             const flattenedLogData = flattenLogdata(data)
             setLatestLogData(flattenedLogData);
             logStore.current = logStore.current.concat(flattenedLogData)
-            if (logStore.current.length === UPDATE_LATE) {
+            if (logStore.current.length === 10) {
                 setLogData((prevLogData) => {
-                    let logData = prevLogData.concat(logStore.current)
-                    if (logData.length >= (DETAIL_LANGE + UPDATE_LATE)) {
-                        logData.splice(-(DETAIL_LANGE + UPDATE_LATE - 1), (UPDATE_LATE - 1))
-                    }
+                    const logData = prevLogData.concat(logStore.current)
                     return logData;
                 });
                 logStore.current = [];
@@ -59,7 +49,7 @@ const HomeView = () => {
             if (logDataGroup) {
                 const logDataRef = ref(db, `logdata/${logDataGroup}`)
                 get(logDataRef).then(snapshot => {
-                    initLogData(snapshot);
+                    initLogData(snapshot.val());
                 }).catch(e => { console.error(e) });
                 onChildAdded(query(logDataRef, limitToLast(1)), (snapshot, prevChildKey) => {
                     updateLogData(snapshot.val());

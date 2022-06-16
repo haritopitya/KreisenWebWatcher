@@ -8,11 +8,11 @@ import Compass from './Compass';
 import SpeedMeter from './SpeedMeter';
 
 const PFD = ({ latestData }) => {
-    const roll =latestData? latestData['dataStationData/roll'].value : 0;
+    const roll = latestData ? latestData['dataStationData/roll'].value : 0;
     const pitch = latestData ? latestData['dataStationData/pitch'].value : 0;
     const direction = latestData ? latestData['dataStationData/yaw'].value : 0;
-    const [speed, setSpeed] = useState(0);
-    const [altitude, setAltitude] = useState(0);
+    const speed = latestData ? latestData['speedometerData/airSpeed'].value : 0;
+    const altitude = latestData ? latestData['altimeterData/altitude'].value : 0;
     const styles = {
         wrap: css({
             height: '50%',
