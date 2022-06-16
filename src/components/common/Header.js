@@ -5,6 +5,7 @@ import { getAuth, signOut } from 'firebase/auth';
 import React, { useState } from 'react';
 import { Button, Navbar, NavbarBrand } from 'react-bootstrap';
 import NavbarCollapse from 'react-bootstrap/esm/NavbarCollapse';
+import { NavLink } from 'react-router-dom';
 import { userContainer } from '../../container';
 import firebase from '../../utils/firebase';
 import UserInfoModal from './UserInfoModal';
@@ -29,23 +30,27 @@ const Header = () => {
     return (
         <>
             <Navbar bg='dark' variant='dark'>
-                <NavbarBrand css={css({ paddingLeft: 10 })}>
-                    <img
-                        alt='logo'
-                        src='./images/logo_simple.png'
-                        className='d-inline-block align-top'
-                        height={'30vh'}
-                    />
-                    Kreisen Watcher
-                </NavbarBrand>
+                <NavLink to={'/'}>
+                    <NavbarBrand css={css({ paddingLeft: 10 })}>
+                        <img
+                            alt='logo'
+                            src='./images/logo_simple.png'
+                            className='d-inline-block align-top'
+                            height={'30vh'}
+                        />
+                        Kreisen Watcher
+                    </NavbarBrand>
+                </NavLink>
                 <NavbarCollapse className='justify-content-end'>
                     {
                         isAdmin && (
-                            <Button variant='dark'>
-                                <FontAwesomeIcon
-                                    icon={faUsersCog}
-                                />
-                            </Button>
+                            <NavLink to={'/admin'}>
+                                <Button variant='dark'>
+                                    <FontAwesomeIcon
+                                        icon={faUsersCog}
+                                    />
+                                </Button>
+                            </NavLink>
                         )
                     }
                     {user && (
