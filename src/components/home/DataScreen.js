@@ -9,7 +9,14 @@ const DataScreen = ({ latestData }) => {
     const onChangeTab = (key) => {
         setTabKey(key)
     };
-    const summaryName = ['dataStationData/pitch', 'dataStationData/roll', 'dataStationData/yaw']
+    const summaryName = [
+        'speedometerData/airSpeed',
+        'altimeterData/altitude',
+        'leftTachometerData/power',
+        'rightTachometerData/power',
+        'leftTachometerData/rotationSpeed',
+        'rightTachometerData/rotationSpeed',
+    ]
     const summary = summaryName.map(key => {
         return latestData && latestData[key]
     })
@@ -29,12 +36,16 @@ const DataScreen = ({ latestData }) => {
                 <Tab eventKey='all' title='All'>
                     <Container fluid>
                         <Row xs={1} md={2}>
-                            {latestData && Object.keys(latestData).map((key) => (< Datacard data={latestData[key]} key={key} />))}
+                            {latestData && Object.keys(latestData).map((key) => (<Datacard data={latestData[key]} key={key} />))}
                         </Row>
                     </Container>
                 </Tab>
                 <Tab eventKey='battery' title='Battery'>
-                    バッテリー
+                    <Container fluid>
+                        <Row xs={1} md={2}>
+                            {latestData && Object.keys(latestData).map((key) => (latestData[key].isBattery && <Datacard data={latestData[key]} key={key} />))}
+                        </Row>
+                    </Container>
                 </Tab>
             </Tabs>
             {/* <TabPanel value='' */}

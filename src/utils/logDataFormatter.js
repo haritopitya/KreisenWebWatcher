@@ -7,9 +7,9 @@ const color = {
   'speedometerData': '#28a745',
   'dataStationData': '#FC7100',
   'empennageData': '#e83e8c',
-  'leftTachometerData': '#6610f2',
-  'rightTachometerData': '#6610f2',
-  'legacyTachometerData': '#6610f2',
+  'leftTachometerData': '#803EF3',
+  'rightTachometerData': '#803EF3',
+  'legacyTachometerData': '#803EF3',
   'currentVoltageData': '#198754',
   'distance': '#dc143c',
 }
@@ -24,16 +24,18 @@ const format = {
     unit: '',
     color: color.default,
     visible: true,
+    isBattery: false,
   },
   'altimeterData/altitude': {
     title: '高度',
     icon: Fas.faTachometerAlt,
     formatter: (val) => (
-      val === -1 ? '---' : (val / 1000).toFixed(1)
+      val === -1 ? '---' : (val / 1000).toFixed(2)
     ),
     unit: 'm',
     color: color.altimeterData,
     visible: true,
+    isBattery: false,
   },
   'altimeterData/battery': {
     title: 'バッテリー(高度計)',
@@ -44,6 +46,7 @@ const format = {
     unit: 'V',
     color: color.altimeterData,
     visible: false,
+    isBattery: true,
   },
   'speedometerData/airSpeed': {
     title: '対気速',
@@ -54,6 +57,7 @@ const format = {
     unit: 'm/s',
     color: color.speedometerData,
     visible: true,
+    isBattery: false,
   },
   'speedometerData/battery': {
     title: 'バッテリー(対気速計)',
@@ -64,6 +68,7 @@ const format = {
     unit: 'V',
     color: color.speedometerData,
     visible: false,
+    isBattery: true,
   },
   'dataStationData/GPSaltitude': {
     title: '高度(GPS)',
@@ -74,6 +79,7 @@ const format = {
     unit: 'm',
     color: color.dataStationData,
     visible: true,
+    isBattery: false,
   },
   'dataStationData/groundSpeed': {
     title: '対地速度',
@@ -84,6 +90,7 @@ const format = {
     unit: 'm/s',
     color: color.dataStationData,
     visible: true,
+    isBattery: false,
   },
   'dataStationData/latitude': {
     title: '緯度',
@@ -94,6 +101,7 @@ const format = {
     unit: '',
     color: color.dataStationData,
     visible: true,
+    isBattery: false,
   },
   'dataStationData/longitude': {
     title: '経度',
@@ -104,6 +112,7 @@ const format = {
     unit: '',
     color: color.dataStationData,
     visible: true,
+    isBattery: false,
   },
   'dataStationData/trueCourse': {
     title: '進路(真方位)',
@@ -114,6 +123,7 @@ const format = {
     unit: '°',
     color: color.dataStationData,
     visible: true,
+    isBattery: false,
   },
   'dataStationData/roll': {
     title: 'ロール',
@@ -124,6 +134,7 @@ const format = {
     unit: '°',
     color: color.dataStationData,
     visible: false,
+    isBattery: false,
   },
   'dataStationData/pitch': {
     title: 'ピッチ',
@@ -134,6 +145,7 @@ const format = {
     unit: '°',
     color: color.dataStationData,
     visible: false,
+    isBattery: false,
   },
   'dataStationData/yaw': {
     title: 'ヨー',
@@ -144,6 +156,7 @@ const format = {
     unit: '°',
     color: color.dataStationData,
     visible: false,
+    isBattery: false,
   },
   'dataStationData/pressure': {
     title: '気圧',
@@ -154,6 +167,7 @@ const format = {
     unit: 'hPa',
     color: color.dataStationData,
     visible: false,
+    isBattery: false,
   },
   'dataStationData/temperature9': {
     title: '温度(DS/9軸)',
@@ -164,6 +178,7 @@ const format = {
     unit: '℃',
     color: color.dataStationData,
     visible: true,
+    isBattery: false,
   },
   'dataStationData/temperatureP': {
     title: '温度(DS/気圧計)',
@@ -174,6 +189,7 @@ const format = {
     unit: '℃',
     color: color.dataStationData,
     visible: false,
+    isBattery: false,
   },
   'dataStationData/battery': {
     title: 'バッテリー(DS)',
@@ -184,6 +200,7 @@ const format = {
     unit: 'V',
     color: color.dataStationData,
     visible: false,
+    isBattery: true,
   },
   'dataStationData/UTC': {
     title: 'UTC(GPS)',
@@ -196,6 +213,7 @@ const format = {
     unit: '',
     color: color.dataStationData,
     visible: true,
+    isBattery: false,
   },
   'dataStationData/direction': {
     title: '方位',
@@ -204,8 +222,9 @@ const format = {
     unit: '°',
     color: color.dataStationData,
     visible: true,
+    isBattery: false,
   },
-  'legacyTachometerData/rotationSpeed': {
+  'legacyTachometerData/Speed': {
     title: '回転数',
     icon: Fas.faSyncAlt,
     formatter: (val) => (
@@ -214,6 +233,7 @@ const format = {
     unit: 'rpm',
     color: color.legacyTachometerData,
     visible: true,
+    isBattery: false,
   },
   'legacyTachometerData/temperature': {
     title: '温度(17回転計)',
@@ -224,6 +244,7 @@ const format = {
     unit: '℃',
     color: color.legacyTachometerData,
     visible: false,
+    isBattery: false,
   },
   'legacyTachometerData/power': {
     title: '出力(17回転計)',
@@ -234,6 +255,7 @@ const format = {
     unit: 'W',
     color: color.legacyTachometerData,
     visible: false,
+    isBattery: false,
   },
   'legacyTachometerData/battery': {
     title: 'バッテリー(17回転計)',
@@ -244,16 +266,18 @@ const format = {
     unit: 'V',
     color: color.legacyTachometerData,
     visible: false,
+    isBattery: true,
   },
   'rightTachometerData/rotationSpeed': {
     title: '回転数(右回転計)',
     icon: Fas.faSyncAlt,
     formatter: (val) => (
-      val === -1 ? '---' : val / 10
+      val === -1 ? '---' : val
     ),
     unit: 'rpm',
     color: color.rightTachometerData,
     visible: false,
+    isBattery: false,
   },
   'rightTachometerData/temperature': {
     title: '温度(右回転計)',
@@ -264,6 +288,7 @@ const format = {
     unit: '℃',
     color: color.rightTachometerData,
     visible: false,
+    isBattery: false,
   },
   'rightTachometerData/power': {
     title: '出力(右回転計)',
@@ -274,6 +299,7 @@ const format = {
     unit: 'W',
     color: color.rightTachometerData,
     visible: true,
+    isBattery: false,
   },
   'rightTachometerData/bridgeRaw': {
     title: 'ひずみゲージ(右回転計)',
@@ -284,6 +310,7 @@ const format = {
     unit: '',
     color: color.rightTachometerData,
     visible: false,
+    isBattery: false,
   },
   'rightTachometerData/quaternionW': {
     title: 'quatW(右回転計)',
@@ -294,6 +321,7 @@ const format = {
     unit: '',
     color: color.rightTachometerData,
     visible: false,
+    isBattery: false,
   },
   'rightTachometerData/battery': {
     title: 'バッテリー(右回転計)',
@@ -304,16 +332,18 @@ const format = {
     unit: 'V',
     color: color.rightTachometerData,
     visible: false,
+    isBattery: true,
   },
   'leftTachometerData/rotationSpeed': {
     title: '回転数(左回転計)',
     icon: Fas.faSyncAlt,
     formatter: (val) => (
-      val === -1 ? '---' : val / 10
+      val === -1 ? '---' : val
     ),
     unit: 'rpm',
     color: color.leftTachometerData,
     visible: false,
+    isBattery: false,
   },
   'leftTachometerData/temperature': {
     title: '温度(左回転計)',
@@ -324,6 +354,7 @@ const format = {
     unit: '℃',
     color: color.leftTachometerData,
     visible: false,
+    isBattery: false,
   },
   'leftTachometerData/power': {
     title: '出力(左回転計)',
@@ -334,6 +365,7 @@ const format = {
     unit: 'W',
     color: color.leftTachometerData,
     visible: true,
+    isBattery: false,
   },
   'leftTachometerData/bridgeRaw': {
     title: 'ひずみゲージ(左回転計)',
@@ -344,6 +376,7 @@ const format = {
     unit: '',
     color: color.leftTachometerData,
     visible: false,
+    isBattery: false,
   },
   'leftTachometerData/quaternionW': {
     title: 'quatW(左回転計)',
@@ -354,6 +387,7 @@ const format = {
     unit: '',
     color: color.leftTachometerData,
     visible: false,
+    isBattery: false,
   },
   'leftTachometerData/battery': {
     title: 'バッテリー(左回転計)',
@@ -364,6 +398,7 @@ const format = {
     unit: 'V',
     color: color.leftTachometerData,
     visible: false,
+    isBattery: true,
   },
   'empennageData/elevatorAngle': {
     title: 'エレベータ角',
@@ -374,6 +409,7 @@ const format = {
     unit: '°',
     color: color.empennageData,
     visible: false,
+    isBattery: false,
   },
   'empennageData/elevatorDisplay': {
     title: 'エレベータ',
@@ -384,6 +420,7 @@ const format = {
     unit: '',
     color: color.empennageData,
     visible: true,
+    isBattery: false,
   },
   'empennageData/elevatorTemperature': {
     title: '温度(エレベータサーボ)',
@@ -394,6 +431,7 @@ const format = {
     unit: '℃',
     color: color.empennageData,
     visible: false,
+    isBattery: false,
   },
   'empennageData/elevatorTrim': {
     title: 'エレベータトリム',
@@ -404,6 +442,7 @@ const format = {
     unit: '',
     color: color.empennageData,
     visible: false,
+    isBattery: false,
   },
   'empennageData/elevatorVoltage': {
     title: '電圧(エレベータサーボ)',
@@ -414,6 +453,7 @@ const format = {
     unit: 'V',
     color: color.empennageData,
     visible: false,
+    isBattery: false,
   },
   'empennageData/rudderAngle': {
     title: 'ラダー角',
@@ -424,6 +464,7 @@ const format = {
     unit: '°',
     color: color.empennageData,
     visible: false,
+    isBattery: false,
   },
   'empennageData/rudderDisplay': {
     title: 'ラダー',
@@ -434,6 +475,7 @@ const format = {
     unit: '',
     color: color.empennageData,
     visible: true,
+    isBattery: false,
   },
   'empennageData/rudderTemperature': {
     title: '温度(ラダーサーボ)',
@@ -444,6 +486,7 @@ const format = {
     unit: '℃',
     color: color.empennageData,
     visible: false,
+    isBattery: false,
   },
   'empennageData/rudderTrim': {
     title: 'ラダートリム',
@@ -454,6 +497,7 @@ const format = {
     unit: '',
     color: color.empennageData,
     visible: false,
+    isBattery: false,
   },
   'empennageData/rudderVoltage': {
     title: '電圧(ラダーサーボ)',
@@ -464,6 +508,7 @@ const format = {
     unit: 'V',
     color: color.empennageData,
     visible: false,
+    isBattery: false,
   },
   'empennageData/controllerBattery': {
     title: 'コントローラバッテリー',
@@ -474,6 +519,7 @@ const format = {
     unit: 'V',
     color: color.empennageData,
     visible: false,
+    isBattery: false,
   },
   'currentVoltageData/voltage': {
     title: 'サーボ電圧',
@@ -484,6 +530,7 @@ const format = {
     unit: 'V',
     color: color.currentVoltageData,
     visible: true,
+    isBattery: false,
   },
   'currentVoltageData/current': {
     title: 'サーボ電流',
@@ -494,6 +541,7 @@ const format = {
     unit: 'mA',
     color: color.currentVoltageData,
     visible: true,
+    isBattery: false,
   },
   'currentVoltageData/power': {
     title: 'サーボ電力',
@@ -504,6 +552,7 @@ const format = {
     unit: 'W',
     color: color.currentVoltageData,
     visible: false,
+    isBattery: false,
   },
   'currentVoltageData/energy': {
     title: 'サーボ電力量',
@@ -514,6 +563,7 @@ const format = {
     unit: 'mAh',
     color: color.currentVoltageData,
     visible: true,
+    isBattery: false,
   },
   'currentVoltageData/battery': {
     title: '電流計バッテリー',
@@ -524,6 +574,7 @@ const format = {
     unit: 'V',
     color: color.currentVoltageData,
     visible: true,
+    isBattery: true,
   },
 }
 
@@ -538,6 +589,7 @@ const formatData = (key, value) => {
       color: format[key].color,
       key: key,
       visible: format[key].visible,
+      isBattery: format[key].isBattery,
     }
   } else {
     return {
@@ -548,6 +600,7 @@ const formatData = (key, value) => {
       unit: '',
       key: key,
       visible: false,
+      isBattery: false,
     }
   }
 }
