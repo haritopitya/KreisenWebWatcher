@@ -10,7 +10,7 @@ export default () => {
                 coordinates.map(e => (
                     <>
                         <Marker longitude={e.lon} latitude={e.lat} />
-                        <Popup longitude={e.lon} latitude={e.lat}>
+                        <Popup longitude={e.lon} latitude={e.lat} css={{color:'black'}}>
                             {e.name}
                         </Popup>
                     </>

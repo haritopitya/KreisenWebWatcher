@@ -10,10 +10,10 @@ const Map = React.memo(({ log }) => {
     const [isTrack, setIsTrack] = useState(true)
     const [isMoveFromFunc, setIsMoveFromFunc] = useState(false)
     const [view, setView] = useState({
-        latitude: 35.55396,
-        longitude: 139.46349,
+        latitude: 35.294230,
+        longitude: 136.254345,
         pitch: 60,
-        zoom: 20,
+        zoom: 17,
         bearing: 0
     })
     const latestData = log && log.filter(e => e['dataStationData/latitude'].value !== '---' && e['dataStationData/longitude'].value !== '---').slice(-1)[0];
