@@ -1,17 +1,16 @@
 import React from 'react';
 import { Marker, Popup } from 'react-map-gl';
 import coordinates from './coordinates';
-import Coordinates from './coordinates';
 
 export default () => {
     return (
         <>
             {
-                coordinates.map(e => (
+                Object.keys(coordinates).map(e => (coordinates[e].show &&
                     <>
-                        <Marker longitude={e.lon} latitude={e.lat} />
-                        <Popup longitude={e.lon} latitude={e.lat} css={{color:'black'}}>
-                            {e.name}
+                        <Marker longitude={coordinates[e].lng} latitude={coordinates[e].lat} />
+                        <Popup longitude={coordinates[e].lng} latitude={coordinates[e].lat} css={{ color: 'black' }}>
+                            {coordinates[e].name}
                         </Popup>
                     </>
                 ))

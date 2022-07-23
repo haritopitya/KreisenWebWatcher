@@ -19,40 +19,48 @@ const AltitudeMeter= ({ altitude }) => {
          width: '100%',
          justifyContent: 'flex-end',
          paddingLeft: 0,
-         transform: `translateY(${(1 + altitude)*100/18}%)`,
+         transform: `translateY(${(1 + parseFloat(altitude))*100/18}%)`,
       }),
       img: css({
          height: '100%',
          maxWidth: '100%',
-      })
+      }),
+      box: css({
+         position: 'absolute',
+         backgroundColor: 'red',
+         borderColor: 'white',
+         borderWidth: 1,
+         width: '16%',
+         height:'20%',
+         justifyContent: 'center',
+         right: 8,
+         flexDirection: 'row',
+         alignItems: 'baseline',
+      }),
+      val: css({
+         color: 'white',
+         textAlign: 'right',
+         fontWeight: 'bold',
+         fontSize: 25,
+      }),
+      unit: css({
+         color: 'white',
+         textAlign: 'right',
+         fontSize: 15,
+      }),
    }
    return (
       <>
+         <div style={styles.box}>
+            <h2 style={styles.val}>
+               {altitude}
+            </h2>
+         </div>
          <div css={styles.wrap}>
             <div css={styles.inner}>
                <img src='svg/altitudeTape.svg' css={styles.img} alt='altitude tape' />
             </div>
          </div>
-         {/* <View style={{
-            position: 'absolute',
-            right: 0,
-            width: '18%',
-            height: '20%',
-            flexDirection: 'row',
-         }}>
-
-            <AltBox height='100%' width='100%' >
-               <View style={{
-                  position: 'absolute',
-                  width: '100%',
-                  height: '100%',
-               }}>
-                  <View style={{ flex: 1, backgroundColor: 'blue' }}></View>
-                  <View style={{ flex: 1, backgroundColor: 'green' }}></View>
-                  <View style={{ flex: 1, backgroundColor: 'yellow' }}></View>
-               </View>
-            </AltBox>
-         </View> */}
       </>
    )
 }

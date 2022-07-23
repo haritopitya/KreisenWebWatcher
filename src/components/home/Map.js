@@ -1,6 +1,8 @@
 import React, { useCallback, useEffect, useState } from "react";
 import ReactMapGL, { NavigationControl } from "react-map-gl";
 import { getAircraftLatLng } from '../../utils/logData';
+import MapCircles from './map/MapCircles';
+import MapLines from './map/MapLines';
 import MapMarker from './map/MapMarker';
 import PlaneMarker from './map/PlaneMarker';
 import PlanePath from './map/PlanePath';
@@ -47,6 +49,8 @@ const Map = React.memo(({ log }) => {
             <NavigationControl visualizePitch={true} />
             <TrackPlaneButton setIsTrack={setIsTrackRef} setIsMoveFromFunc={setIsMoveFromFuncRef} position={currentPosition} />
             <PlaneMarker position={currentPosition} pitch={view.pitch} view={view} />
+            <MapLines />
+            <MapCircles />
         </ReactMapGL>
     )
 })

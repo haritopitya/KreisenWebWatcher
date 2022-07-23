@@ -70,7 +70,7 @@ const HomeView = () => {
                 <Graph log={logData} />
             </div>
             <div css={styles.inner}>
-                <DataScreen latestData={latestLogData} />
+                <DataScreen currentData={latestLogData} />
             </div>
             <div css={styles.inner}>
                 <Map log={logData} />

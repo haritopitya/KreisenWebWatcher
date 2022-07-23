@@ -1,69 +1,76 @@
-const coordinates = [
-    {
+const coordinates = {
+    Platform: {
         lat: 35.294230,
-        lon: 136.254345,
-        name:'プラホ',
+        lng: 136.254344,
+        name: 'プラホ',
+        show: true,
     },
-    {
-        lat: 35.230615,
-        lon: 136.060462,
+    PlatfromPoint: {
+        lat: 35.2968648,
+        lng: 136.2438302,
+        name: 'プラホポイント',
+        show: true,
+    },
+    OkiIslandPoint: {
+        lat: 35.250789,
+        lng: 136.063712,
         name: '沖島ポイント',
+        show: true,
     },
-    {
-        lat: 35.423422,
-        lon: 136.117089,
+    ChikubuIslandPoint: {
+        lat: 35.416626,
+        lng: 136.124324,
         name: '竹生島ポイント',
+        show: true,
     },
-    {
+    ChikubuIsland: {
         lat: 35.421673,
-        lon: 136.143271,
+        lng: 136.143271,
         name: '竹生島',
+        show: true,
     },
-    {
+    TakeIsland: {
         lat: 35.296605,
-        lon: 136.178150,
+        lng: 136.178150,
         name: '多景島',
+        show: true,
     },
-    {
+    OkinoShiraishi: {
         lat: 35.293564,
-        lon: 136.123962,
+        lng: 136.123962,
         name: '沖の白石',
+        show: true,
     },
-    {
+    OkiIsland: {
         lat: 35.207519,
-        lon: 136.063722,
+        lng: 136.063722,
         name: '沖島',
+        show: true,
     },
-    {
+    CenterlinePoint: {
+        lat: 35.340891,
+        lng: 136.064750,
+        name: '中心線ポイント',
+        show: false,
+    },
+    HondaAirportT: {
         lat: 35.978199,
-        lon: 139.521635,
+        lng: 139.521635,
         name: 'ホンダエアポート',
+        show: true,
     },
-    {
+    HondaAirportAspara1: {
         lat: 35.977828,
-        lon: 139.522560,
+        lng: 139.522560,
         name: 'アスパラ',
+        show: true,
     },
-    {
+    HondaAirportAspara2: {
         lat: 35.974846,
-        lon: 139.525835,
+        lng: 139.525835,
         name: 'アスパラ',
-    },
-    {
-        lat: 35.310188,
-        lon: 136.093454,
-        name: 'こどもの国',
-    },
-    {
-        lat: 35.322117426216664,
-        lon: 136.11359078015116,
-        name: '中点',
-    },
-    {
-        lat: 35.33192108967134,
-        lon: 136.06388967789502,
-        name: '中点',
+        show: true,
     }
-]
+}
 
 export default coordinates

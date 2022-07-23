@@ -404,7 +404,7 @@ const format = {
     title: 'エレベータ角',
     icon: Fas.faRuler,
     formatter: (val) => (
-      val === -1 ? '---' : val / 10
+       val / 10
     ),
     unit: '°',
     color: color.empennageData,
@@ -459,7 +459,7 @@ const format = {
     title: 'ラダー角',
     icon: Fas.faRuler,
     formatter: (val) => (
-      val === -1 ? '---' : val / 10
+       val / 10
     ),
     unit: '°',
     color: color.empennageData,
@@ -510,8 +510,30 @@ const format = {
     visible: false,
     isBattery: false,
   },
+  'empennageData/aileronLAngle': {
+    title: '左エルロン角',
+    icon: Fas.faRuler,
+    formatter: (val) => (
+      val / 10
+    ),
+    unit: '°',
+    color: color.empennageData,
+    visible: false,
+    isBattery: false,
+  },
+  'empennageData/aileronRAngle': {
+    title: '右エルロン角',
+    icon: Fas.faRuler,
+    formatter: (val) => (
+      val / 10
+    ),
+    unit: '°',
+    color: color.empennageData,
+    visible: false,
+    isBattery: false,
+  },
   'empennageData/controllerBattery': {
-    title: 'コントローラバッテリー',
+    title: 'バッテリー(コントローラ)',
     icon: Fas.faBatteryThreeQuarters,
     formatter: (val) => (
       val === -1 ? '---' : val / 10
@@ -519,8 +541,9 @@ const format = {
     unit: 'V',
     color: color.empennageData,
     visible: false,
-    isBattery: false,
+    isBattery: true,
   },
+
   'currentVoltageData/voltage': {
     title: 'サーボ電圧',
     icon: Fas.faCarBattery,

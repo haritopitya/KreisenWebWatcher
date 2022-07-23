@@ -1,46 +1,43 @@
 import React from 'react'
-import { Circle } from 'react-native-maps'
+import { Layer, Source } from 'react-map-gl'
+import * as turf from "@turf/turf";
+import coordinates from './coordinates'
 
-import Coordinates from './coordinates'
-
-export default () => {
+const MapCircles = React.memo(() => {
+    const circleData = circleGeojson([1, 5, 10, 15, 18])
     return (
         <>
-            <Circle
-                center={Coordinates.OkiIslandPoint}
-                radius={400}
-                strokeColor='#000080'
-                zIndex={2}
-                strokeWidth={1.5}
-            />
-            <Circle
-                center={Coordinates.ChikubuIslandPoint}
-                radius={400}
-                strokeColor='#000080'
-                zIndex={2}
-                strokeWidth={1.5}
-            />
-            <Circle
-                center={Coordinates.Platform}
-                radius={1000 * 19}
-                strokeColor='#808080'
-                zIndex={2}
-                strokeWidth={1}
-            />
-            <Circle
-                center={Coordinates.OkiIslandPoint}
-                radius={1000 * 22}
-                strokeColor='#808080'
-                zIndex={2}
-                strokeWidth={1}
-            />
-            <Circle
-                center={Coordinates.ChikubuIslandPoint}
-                radius={1000 * 22}
-                strokeColor='#808080'
-                zIndex={2}
-                strokeWidth={1}
-            />
+            <Source type='geojson' data={circleData}>
+                <Layer {...okiIslandCircleLayer} />
+            </Source>
         </>
     )
+})
+
+const circleGeojson = (radiuses) => {
+    const point = {
+        type: 'Feature',
+        geometry: {
+            type: 'Point',
+            coordinates: [coordinates.Platform.lng, coordinates.Platform.lat],
+        },
+        properties: {
+            distance: 1
+        }
+    }
+    const features = radiuses.map((e) => turf.buffer(point, e, { units: 'kilometers' }))
+    return {
+        type: 'FeatureCollection',
+        features: features
+    }
 }
+
+const okiIslandCircleLayer = {
+    'type': 'line',
+    'paint': {
+        'line-color': 'lightgray',
+        'line-width': 1,
+    }
+}
+
+export default MapCircles
