@@ -51,11 +51,6 @@ const AltitudeMeter= ({ altitude }) => {
    }
    return (
       <>
-         <div style={styles.box}>
-            <h2 style={styles.val}>
-               {altitude}
-            </h2>
-         </div>
          <div css={styles.wrap}>
             <div css={styles.inner}>
                <img src='svg/altitudeTape.svg' css={styles.img} alt='altitude tape' />

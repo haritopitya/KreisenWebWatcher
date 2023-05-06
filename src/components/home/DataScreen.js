@@ -89,7 +89,6 @@ const createDistance = (aircraftLatLng) => {
         const dist =
             aircraftLatLng && aircraftLatLng.lat > 0 && aircraftLatLng.lng > 0 ?
                 (getDistance(pos, aircraftLatLng) / 1000).toFixed(3) : '---'
-        console.log(getDistance(pos,aircraftLatLng));
         return {
             title,
             icon: faFlag,
